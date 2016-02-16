@@ -14,20 +14,32 @@ using namespace std;
 
 class assignments
 {
-public:
-	assignments();
-	assignments(Date due, string desc, Date assigned, enum status);
-	~assignments();
-
 private:
 	Date dueDate;
 	string description;
 	Date assignedDate;
 	enum status;
+
+public:
+	assignments();
+	assignments(Date due, string desc, Date assigned, enum assStatus);
+	~assignments();
+	
+	Date getDate() { return dueDate; }
+	string getDesc() { return description; }
+	Date getAssDate(){ return assignedDate; }
+	enum getStatus() { return status; }
+	
+
 };
 
-assignments::assignments()
+assignments::assignments(Date due, string desc, Date assigned, enum assStatus)
 {
+	dueDate = due;
+	description = desc;
+	assignedDate = assigned;
+	status = assStatus;
+
 }
 
 assignments::~assignments()

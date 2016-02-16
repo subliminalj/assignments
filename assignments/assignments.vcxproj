@@ -11,8 +11,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="assignments.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Source.cpp" />
     <ClCompile Include="interface.h" />
     <ClCompile Include="String_Tokenizer.cpp" />
   </ItemGroup>
