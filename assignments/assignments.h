@@ -8,7 +8,7 @@
 #include <list>
 #include "Date.h"
 #include "interface.h"
-#include "StringTokenizer.h"
+#include "String_Tokenizer.h"
 
 using namespace std;
 
@@ -18,26 +18,27 @@ private:
 	Date dueDate;
 	string description;
 	Date assignedDate;
-	enum assStatus;
+	string assStatus;
 
 public:
 	assignments();
-	assignments(Date, string, Date, enum);
+	assignments(Date, string, Date, string);
 	~assignments();
 	
 	Date getDate() { return dueDate; }
 	string getDesc() { return description; }
 	Date getAssDate(){ return assignedDate; }
-	enum getStatus() { return status; }
-	ostream& operator<<(ostream& os, const assignments& ass);
+	string getStatus() { return assStatus; }
+	//friend ostream& operator<<(ostream& os, const assignments& ass);
 };
 
-assignments::ostream& operator<<(ostream& os, const assignments& ass)
-{
-	cout << getDate() << wset(20) << getDesc() << wset(10) << getAssDate() << wset(10) << getStatus();
-}
+//assignments::ostream& operator<<(ostream& os, const assignments& ass)
+//{
+//	output << getDate() << wset(20) << getDesc() << wset(10) << getAssDate() << wset(10) << getStatus();
+//	return output;
+//}
 
-assignments::assignments(Date due, string desc, Date assigned, enum status)
+assignments::assignments(Date due, string desc, Date assigned, string status)
 {
 	dueDate = due;
 	description = desc;
