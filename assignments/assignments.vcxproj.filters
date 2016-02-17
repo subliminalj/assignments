@@ -15,24 +15,24 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="interface.h">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="String_Tokenizer.cpp">
+    <ClCompile Include="assignments.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="assignments.cpp">
+    <ClCompile Include="String_Tokenizer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Date.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
     <ClInclude Include="assignments.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Date.h">
+    <ClInclude Include="interface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="String_Tokenizer.h">

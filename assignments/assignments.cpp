@@ -77,16 +77,8 @@
 //
 //}
 //
-//bool compareinv(inventory& left, inventory& right)
-//{
-//	return left.get_stocknum() < right.get_stocknum();
-//}
+
 //
-//void sort()
 //
-//{
-//	stock.sort(compareinv);
-//
-//}
 //
 //

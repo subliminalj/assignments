@@ -18,27 +18,31 @@ private:
 	Date dueDate;
 	string description;
 	Date assignedDate;
-	enum status;
+	enum assStatus;
 
 public:
 	assignments();
-	assignments(Date due, string desc, Date assigned, enum assStatus);
+	assignments(Date, string, Date, enum);
 	~assignments();
 	
 	Date getDate() { return dueDate; }
 	string getDesc() { return description; }
 	Date getAssDate(){ return assignedDate; }
 	enum getStatus() { return status; }
-	
-
+	ostream& operator<<(ostream& os, const assignments& ass);
 };
 
-assignments::assignments(Date due, string desc, Date assigned, enum assStatus)
+assignments::ostream& operator<<(ostream& os, const assignments& ass)
+{
+	cout << getDate() << wset(20) << getDesc() << wset(10) << getAssDate() << wset(10) << getStatus();
+}
+
+assignments::assignments(Date due, string desc, Date assigned, enum status)
 {
 	dueDate = due;
 	description = desc;
 	assignedDate = assigned;
-	status = assStatus;
+	assStatus = status;
 
 }
 
