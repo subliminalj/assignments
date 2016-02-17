@@ -22,13 +22,20 @@ private:
 
 public:
 	assignments();
-	assignments(Date, string, Date, string);
+	assignments(Date due, string desc, Date assigned, string status);
 	~assignments();
 	
 	Date getDate() { return dueDate; }
 	string getDesc() { return description; }
 	Date getAssDate(){ return assignedDate; }
 	string getStatus() { return assStatus; }
+
+	void setDate(Date due) { dueDate = due; }
+	void setDesc(string desc) { description = desc; }
+	void setAssDate(Date assigned){ assignedDate = assigned; }
+	void setStatus(string status) { assStatus = status; }
+
+
 	//friend ostream& operator<<(ostream& os, const assignments& ass);
 };
 
