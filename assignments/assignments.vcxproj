@@ -19,7 +19,7 @@
     <ClInclude Include="assignments.h" />
     <ClInclude Include="Date.h" />
     <ClInclude Include="interface.h" />
-    <ClInclude Include="String_Tokenizer.h" />
+    <ClInclude Include="StringTokenizer.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{C4A7AE7C-47F4-4DE9-8921-B38E6C6ED501}</ProjectGuid>

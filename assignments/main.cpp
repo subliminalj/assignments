@@ -7,8 +7,8 @@ bool compare(assignments& left, assignments& right)
 void sort()
 
 {
-	assigned.sort(compare);
-	completed.sort(compare);
+//	assigned.sort(compare);
+//	completed.sort(compare);
 
 }
 void main(void)

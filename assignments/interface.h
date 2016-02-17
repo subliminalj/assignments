@@ -23,8 +23,8 @@ public:
 			"Undo"
 			"Redo"
 			"Save",
-			"Exit" 
-	};
+			"Exit"
+		};
 		const size_t NUM_COMMANDS = 12;
 		size_t choice = NUM_COMMANDS - 1;
 		do {
@@ -51,44 +51,44 @@ public:
 		} while (choice < NUM_COMMANDS - 1);
 	}
 
-	do_display(assignments due, assignments complete)
+	void do_display(assignments due, assignments complete)
 	{
 		list<assignments>::const_iterator dueiter;
 		list<assignments>::const_iterator compiter;
 		
 		for (dueiter = due.begin(); dueiter != due.end(); dueiter++)
 		{
-			cout << due;
+			cout << due << endl;
 
 		}
 	
 		for (compiter = complete.begin(); compiter != complete.end(); compiter++)
 		{
-			cout << complete;
+			cout << complete << endl;
 
 		}
 	}
-	do_add_entry()
+	void do_add_entry()
 	{}
-	do_complete_entry()
+	void do_complete_entry()
 	{}
-	do_delete()
+	void do_delete()
 	{}
-	do_edit_date_entry()
+	void do_edit_date_entry()
 	{}
-	do_edit_desc()
+	void do_edit_desc()
 	{}
-	do_count_late()
+	void do_count_late()
 	{}
-	do_sort()
+	void do_sort()
 	{}
-	do_undo()
+	void do_undo()
 	{}
-	do_redo()
+	void do_redo()
 	{}
-	do_save()
+	void do_save()
 	{}
-	do_exit()
+	void do_exit()
 	{
 	exit(0);
 	}

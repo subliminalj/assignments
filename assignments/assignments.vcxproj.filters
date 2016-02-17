@@ -35,7 +35,7 @@
     <ClInclude Include="interface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="String_Tokenizer.h">
+    <ClInclude Include="StringTokenizer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
