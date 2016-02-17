@@ -51,18 +51,18 @@ public:
 		} while (choice < NUM_COMMANDS - 1);
 	}
 
-	void do_display(assignments& due, assignments& complete)
+	void do_display(list<assignments> due, list<assignments> complete)
 	{
 		list<assignments>::iterator dueiter;
 		list<assignments>::iterator compiter;
 		
-		for (due = dueiter.begin(); due != dueiter.end(); dueiter++)
+		for (dueiter = due.begin(); dueiter != due.end(); dueiter++)
 		{
 			cout << due << endl;
 
 		}
 	
-		for (complete = compiter.begin(); complete != compiter.end(); compiter++)
+		for (compiter = complete.begin(); compiter != complete.end(); compiter++)
 		{
 			cout << complete << endl;
 
@@ -76,7 +76,7 @@ public:
 		temp.setAssDate(assigned);
 		temp.setStatus(status);
 	}
-	void do_complete_entry()
+	void do_complete_entry(assignments assigned, assignments completed)
 	{}
 	void do_delete()
 	{}

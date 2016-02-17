@@ -7,7 +7,6 @@
 #include <iomanip>
 #include <list>
 #include "Date.h"
-#include "interface.h"
 #include "String_Tokenizer.h"
 
 using namespace std;
@@ -36,14 +35,15 @@ public:
 	void setStatus(string status) { assStatus = status; }
 
 
-	//friend ostream& operator<<(ostream& os, const assignments& ass);
+	friend ostream& operator<<(ostream& os, assignments& ass);
 };
 
-//assignments::ostream& operator<<(ostream& os, const assignments& ass)
-//{
-//	output << getDate() << wset(20) << getDesc() << wset(10) << getAssDate() << wset(10) << getStatus();
-//	return output;
-//}
+assignments::ostream& operator<<(ostream& os, assignments& ass)
+{
+	string output;
+	output << ass.getDate() << wset(20) << ass.getDesc() << wset(10) << ass.getAssDate() << wset(10) << ass.getStatus();
+	return output;
+}
 
 assignments::assignments(Date due, string desc, Date assigned, string status)
 {
