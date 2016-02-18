@@ -38,11 +38,11 @@ public:
 	friend ostream& operator<<(ostream& os, assignments& ass);
 };
 
-assignments::ostream& operator<<(ostream& os, assignments& ass)
+ostream& operator<<(ostream& os, assignments& ass)
 {
-	string output;
-	output << ass.getDate() << wset(20) << ass.getDesc() << wset(10) << ass.getAssDate() << wset(10) << ass.getStatus();
-	return output;
+
+	os << ass.getDate().toString() << ", " << ass.getDesc() << ", " << ass.getAssDate().toString() << ", " << ass.getStatus();
+	return os;
 }
 
 assignments::assignments(Date due, string desc, Date assigned, string status)

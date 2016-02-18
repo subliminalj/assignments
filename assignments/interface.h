@@ -19,9 +19,9 @@ public:
 			"Edit Due Date",
 			"Edit Description",
 			"Count Late Assignments",
-			"Sort pending assignments by due date"
-			"Undo"
-			"Redo"
+			"Sort pending assignments by due date",
+			"Undo",
+			"Redo",
 			"Save",
 			"Exit"
 		};
@@ -58,13 +58,13 @@ public:
 		
 		for (dueiter = due.begin(); dueiter != due.end(); dueiter++)
 		{
-			cout << due << endl;
+			cout << due*;
 
 		}
 	
 		for (compiter = complete.begin(); compiter != complete.end(); compiter++)
 		{
-			cout << complete << endl;
+			cout << complete*;
 
 		}
 	}
