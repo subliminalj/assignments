@@ -5,10 +5,11 @@
 
 class User_Interface{
 private:
-
+	list<assignments> due;
+	list<assignments> completed;
 
 public:
-
+	User_Interface(list<assignments>& due, list<assignments>& complete){}
 	void process_commands()
 	{
 		string commands[] = { //the options the user is given
@@ -34,8 +35,8 @@ public:
 			cin >> choice;
 			cin.ignore(numeric_limits<int>::max(), '\n');
 			switch (choice) {
-			//case 0: do_display(); break;
-			//case 1: do_add_entry(); break;
+			case 0: do_display(); break;
+			case 1: do_add_entry(); break;
 			//case 2: do_complete_entry(); break;
 			case 3: do_delete(); break;
 			case 4: do_edit_date_entry(); break;
@@ -51,33 +52,31 @@ public:
 		} while (choice < NUM_COMMANDS - 1);
 	}
 
-	/*void do_display(list<assignments> due, list<assignments> complete)
+	void do_display()
 	{
-		list<assignments>::iterator dueiter;
-		list<assignments>::iterator compiter;
-		
-		for (dueiter = due.begin(); dueiter != due.end(); dueiter++)
-		{
-			cout << due*;
-
-		}
-	
-		for (compiter = complete.begin(); compiter != complete.end(); compiter++)
-		{
-			cout << complete*;
-
-		}
-	}*/
-	/*void do_add_entry(assignments list_to_add, Date due, string desc, Date assigned, string status)
-	{
-		assignments temp;
-		temp.setDate(due);
-		temp.setDesc(desc);
-		temp.setAssDate(assigned);
-		temp.setStatus(status);
+		cout << "Due Date, description, assigned date, status";
+		//cout << due << endl;
+		//cout << completed << endl;
 	}
-	void do_complete_entry(assignments assigned, assignments completed)
-	{}*/
+	void do_add_entry()
+	{
+		Date duedate;
+		string desc; 
+		Date assigned; 
+		string status;
+		assignments temp;
+		cout << "Input due date:" << endl;
+		temp.setDate(duedate);
+		cout << "Input description:" << endl;
+		temp.setDesc(desc);
+		cout << "Input date assigned:" << endl;
+		temp.setAssDate(assigned);
+		cout << "Input status:" << endl;
+		temp.setStatus(status);
+		due.push_front(temp);
+	}
+	void do_complete_entry()
+	{}
 	void do_delete()
 	{}
 	void do_edit_date_entry()

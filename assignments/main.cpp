@@ -22,7 +22,7 @@ void main(void)
 	list<assignments>::const_iterator const_it;
 
 	
-	User_Interface ui;
+	User_Interface ui(list<assignments> assigned, list<assignments>completed);
 	ui.process_commands();
 
 
