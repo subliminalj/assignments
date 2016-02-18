@@ -34,9 +34,9 @@ public:
 			cin >> choice;
 			cin.ignore(numeric_limits<int>::max(), '\n');
 			switch (choice) {
-			case 0: do_display(); break;
-			case 1: do_add_entry(); break;
-			case 2: do_complete_entry(); break;
+			//case 0: do_display(); break;
+			//case 1: do_add_entry(); break;
+			//case 2: do_complete_entry(); break;
 			case 3: do_delete(); break;
 			case 4: do_edit_date_entry(); break;
 			case 5: do_edit_desc(); break;
@@ -51,7 +51,7 @@ public:
 		} while (choice < NUM_COMMANDS - 1);
 	}
 
-	void do_display(list<assignments> due, list<assignments> complete)
+	/*void do_display(list<assignments> due, list<assignments> complete)
 	{
 		list<assignments>::iterator dueiter;
 		list<assignments>::iterator compiter;
@@ -67,8 +67,8 @@ public:
 			cout << complete*;
 
 		}
-	}
-	void do_add_entry(assignments list_to_add, Date due, string desc, Date assigned, string status)
+	}*/
+	/*void do_add_entry(assignments list_to_add, Date due, string desc, Date assigned, string status)
 	{
 		assignments temp;
 		temp.setDate(due);
@@ -77,7 +77,7 @@ public:
 		temp.setStatus(status);
 	}
 	void do_complete_entry(assignments assigned, assignments completed)
-	{}
+	{}*/
 	void do_delete()
 	{}
 	void do_edit_date_entry()

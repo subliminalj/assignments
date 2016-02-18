@@ -21,9 +21,17 @@ private:
 
 public:
 	assignments();
-	assignments(Date due, string desc, Date assigned, string status);
-	~assignments();
-	
+	assignments(Date due, string desc, Date assigned, string status)
+	{
+		dueDate = due;
+		description = desc;
+		assignedDate = assigned;
+		assStatus = status;
+
+	}
+
+
+
 	Date getDate() { return dueDate; }
 	string getDesc() { return description; }
 	Date getAssDate(){ return assignedDate; }
@@ -33,29 +41,13 @@ public:
 	void setDesc(string desc) { description = desc; }
 	void setAssDate(Date assigned){ assignedDate = assigned; }
 	void setStatus(string status) { assStatus = status; }
+	friend ostream& operator<<(ostream& os, assignments& ass){
+		os << ass.getDate().toString() << ", " << ass.getDesc() << ", " << ass.getAssDate().toString() << ", " << ass.getStatus();
+		return os;
+	}
 
-
-	friend ostream& operator<<(ostream& os, assignments& ass);
 };
 
-ostream& operator<<(ostream& os, assignments& ass)
-{
-
-	os << ass.getDate().toString() << ", " << ass.getDesc() << ", " << ass.getAssDate().toString() << ", " << ass.getStatus();
-	return os;
-}
-
-assignments::assignments(Date due, string desc, Date assigned, string status)
-{
-	dueDate = due;
-	description = desc;
-	assignedDate = assigned;
-	assStatus = status;
-
-}
-
-assignments::~assignments()
-{
-}
 
 #endif
+

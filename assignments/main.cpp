@@ -1,4 +1,5 @@
 #include "assignments.h"
+#include "interface.h"
 
 //bool compare(assignments& left, assignments& right)
 //{
@@ -21,7 +22,8 @@ void main(void)
 	list<assignments>::const_iterator const_it;
 
 	
-
+	User_Interface ui;
+	ui.process_commands();
 
 
 
