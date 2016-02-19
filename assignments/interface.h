@@ -101,7 +101,7 @@ public:
 	void do_delete()
 	{
 		string displaydel;
-		cout << "Type the description of the pending assignment to delete";
+		cout << "Type the description of the pending assignment to delete" << endl;
 		do_display();
 		cout << "description: ";
 		cin >> displaydel;
@@ -112,6 +112,7 @@ public:
 			{
 				deliter = due.erase(deliter);
 				continue;
+				cout << "entry deleted" << endl;
 			}
 		}
 	}
@@ -138,7 +139,9 @@ public:
 	}
 
 	void do_sort()
-	{}
+	{
+		sort();
+	}
 	void do_undo()
 	{}
 	void do_redo()
