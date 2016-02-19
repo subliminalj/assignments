@@ -3,6 +3,7 @@
 
 #include "assignments.h"
 
+
 class User_Interface{
 private:
 	list<assignments> due;
@@ -39,7 +40,7 @@ public:
 			switch (choice) {
 			case 0: do_display(); break;
 			case 1: do_add_entry(); break;
-			//case 2: do_complete_entry(); break;
+			case 2: do_complete_entry(); break;
 			case 3: do_delete(); break;
 			case 4: do_edit_date_entry(); break;
 			case 5: do_edit_desc(); break;
@@ -98,7 +99,22 @@ public:
 	void do_complete_entry()
 	{}
 	void do_delete()
-	{}
+	{
+		string displaydel;
+		cout << "Type the description of the pending assignment to delete";
+		do_display();
+		cout << "description: ";
+		cin >> displaydel;
+		list<assignments>::iterator deliter;
+		for (deliter = due.begin(); deliter != due.end(); deliter++)
+		{
+			if (deliter->getDesc == displaydel)
+			{
+				deliter = due.erase(deliter);
+				continue;
+			}
+		}
+	}
 	void do_edit_date_entry()
 	{}
 	void do_edit_desc()
@@ -135,6 +151,18 @@ public:
 	}
 
 
+
+	bool compare(assignments& left, assignments& right)
+	{
+		return left.getDate < right.getDate();
+	}
+	void sort()
+
+	{
+		due.sort(compare);
+		completed.sort(compare);
+
+	}
 
 
 
