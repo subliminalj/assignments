@@ -22,12 +22,6 @@ void main(void)
 	list<assignments>::const_iterator const_it;
 
 	
-	User_Interface ui(list<assignments> assigned, list<assignments>completed);
+	User_Interface ui(assigned, completed);
 	ui.process_commands();
-
-
-
-
-
-
 }

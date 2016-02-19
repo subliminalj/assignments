@@ -13,36 +13,65 @@ using namespace std;
 
 class assignments
 {
+	enum Status { assigned, completed, late };
 private:
 	Date dueDate;
 	string description;
 	Date assignedDate;
-	string assStatus;
+	Status assStatus;
+	string statString;
 
 public:
-	assignments();
-	assignments(Date due, string desc, Date assigned, string status)
+	assignments() {};
+	assignments(Date due, string desc, Date assigned, Status status)
 	{
 		dueDate = due;
 		description = desc;
 		assignedDate = assigned;
 		assStatus = status;
-
 	}
-
-
 
 	Date getDate() { return dueDate; }
 	string getDesc() { return description; }
-	Date getAssDate(){ return assignedDate; }
-	string getStatus() { return assStatus; }
+	Date getAssDate() { return assignedDate; }
+	Status getStatus() { return assStatus; }
 
 	void setDate(Date due) { dueDate = due; }
 	void setDesc(string desc) { description = desc; }
 	void setAssDate(Date assigned){ assignedDate = assigned; }
-	void setStatus(string status) { assStatus = status; }
+	void setStatus(char status) 
+	{
+		if (status == 'A' || status == 'a')
+			assStatus = assigned;
+		else if (status == 'C' || status == 'c')
+			assStatus = completed;
+		else if (status == 'L' || status == 'l')
+			assStatus = late;
+		else
+			throw std::exception("Incorrect entry!");
+		cout << assStatus;
+	}
+
+	string statusAsString()
+	{
+		switch (assStatus)
+		{
+		case 0:
+			statString = "assigned";
+			break;
+		case 1:
+			statString = "completed";
+			break;
+		case 2:
+			statString = "late";
+			break;
+		}
+
+		return statString;
+	}
+
 	friend ostream& operator<<(ostream& os, assignments& ass){
-		os << ass.getDate().toString() << ", " << ass.getDesc() << ", " << ass.getAssDate().toString() << ", " << ass.getStatus();
+		os << ass.getDate().toString() << ", " << ass.getDesc() << ", " << ass.getAssDate().toString() << ", " << ass.statusAsString();
 		return os;
 	}
 
