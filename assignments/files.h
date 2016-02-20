@@ -18,7 +18,7 @@ void outfile(list<assignments> due, list<assignments> completed)
 	
 	for (dueit = due.begin(); dueit != due.end(); dueit++)
 	{
-		fileout << dueit->getDate << "," << dueit->getDesc << "," << dueit->getAssDate << "," << dueit->getStatus << endl;
+		fileout << dueit->getDate << "," << dueit->getDesc << "," << dueit->getAssDate << "," << dueit->statusAsString << endl;
 	}
 
 
@@ -43,23 +43,21 @@ void infile(list<assignments> due, list<assignments> completed)
 
 	while (!filein.eof())
 	{
-		Date duedate, assigned;
-		
-		char status;
 		assignments temp;
 		string input;
 		
 		while (getline(filein, input))//read the next line in the file, if no more lines are availble, the while loop will exit.
 		{
 			String_Tokenizer st(input, ",");//a tokenizer for parsing a line of tokens (the tokens are seperated by commas)
-			Date duedate = trim(st.next_token());//the first token in line is the due date
-			string desc = trim(st.next_token());//the next token is the description
-			Date assigned = trim(st.next_token());//the next token is the assigned date
-			char status = trim(st.next_token());// the next token is the status
+			Date duedate = st.next_token();//the first token in line is the due date
+			string desc = st.next_token();//the next token is the description
+			Date assigned = st.next_token();//the next token is the assigned date
+			string status = st.next_token();// the next token is the status
 			temp.setDate(duedate);
 			temp.setDesc(desc);
 			temp.setAssDate(assigned);
-			temp.setStatus(status);
+			char statchar = status[0];
+			temp.setStatus(statchar);
 			if (temp.getStatus == 'a' || temp.getStatus == 'A')//if the status is assigned push on the due list
 				due.push_back(temp);
 			else

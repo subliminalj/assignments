@@ -6,6 +6,11 @@
 #include <fstream>
 #include <iomanip>
 #include <list>
+#include <algorithm>
+#include <fstream>
+#include <istream>
+#include <ostream>
+#include <cstdlib>
 #include "Date.h"
 #include "String_Tokenizer.h"
 
