@@ -2,7 +2,7 @@
 #define _INTERFACE_H_
 
 #include "assignments.h"
-
+#include "files.h"
 
 class User_Interface{
 private:
@@ -148,9 +148,14 @@ public:
 	void do_redo() // redo last undone action
 	{}
 	void do_save() // save all entries
-	{}
+	{
+		outfile(due, completed);
+	
+	}
 	void do_load() // load database and overwrite all items
-	{}
+	{
+		infile();
+	}
 	void do_exit() // exit program
 	{
 		exit(0);

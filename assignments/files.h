@@ -28,7 +28,7 @@ void outfile(list<assignments> due, list<assignments> completed)
 
 }
 
-void infile()
+void infile(list<assignments> due, list<assignments> completed)
 {
 
 	ifstream filein;
@@ -41,11 +41,31 @@ void infile()
 
 	cout << "Reading from file..." << endl;
 
-	//input here
-
-
-
-
+	while (!filein.eof())
+	{
+		Date duedate, assigned;
+		
+		char status;
+		assignments temp;
+		string input;
+		
+		while (getline(filein, input))//read the next line in the file, if no more lines are availble, the while loop will exit.
+		{
+			String_Tokenizer st(input, ",");//a tokenizer for parsing a line of tokens (the tokens are seperated by commas)
+			Date duedate = trim(st.next_token());//the first token in line is the due date
+			string desc = trim(st.next_token());//the next token is the description
+			Date assigned = trim(st.next_token());//the next token is the assigned date
+			char status = trim(st.next_token());// the next token is the status
+			temp.setDate(duedate);
+			temp.setDesc(desc);
+			temp.setAssDate(assigned);
+			temp.setStatus(status);
+			if (temp.getStatus == 'a' || temp.getStatus == 'A')//if the status is assigned push on the due list
+				due.push_back(temp);
+			else
+				completed.push_back(temp);// otherwise push on the completed list
+		}
+	}
 	filein.close();
 
 }
