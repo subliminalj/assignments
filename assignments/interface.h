@@ -29,7 +29,7 @@ public:
 			"Save",
 			"Exit"
 		};
-		const size_t NUM_COMMANDS = 12;
+		const size_t NUM_COMMANDS = 13;
 		size_t choice = NUM_COMMANDS - 1;
 		do {
 			for (size_t i = 0; i < NUM_COMMANDS; i++) {
@@ -49,13 +49,14 @@ public:
 			case 8: do_undo(); break;
 			case 9: do_redo(); break;
 			case 10: do_save(); break;
-			case 11: do_exit(); break;
+			case 11: do_load(); break;
+			case 12: do_exit(); break;
 			}
 			system("CLS");
 		} while (choice < NUM_COMMANDS - 1);
 	}
 
-	void do_display()
+	void do_display()// cycle through both due and completed lists and display contents
 	{
 		list<assignments>::iterator dueiter;
 		list<assignments>::iterator compiter;
@@ -71,7 +72,7 @@ public:
 		system("PAUSE");
 	}
 
-	void do_add_entry()
+	void do_add_entry()// add a new entry to the due list
 	{
 		Date duedate, assigned;
 		string desc;
@@ -96,9 +97,9 @@ public:
 		
 		due.push_front(temp);
 	}
-	void do_complete_entry()
+	void do_complete_entry() // mark an entry as completed
 	{}
-	void do_delete()
+	void do_delete()// remove an entry from the due list
 	{
 		string displaydel;
 		cout << "Type the description of the pending assignment to delete" << endl;
@@ -116,11 +117,11 @@ public:
 			}
 		}
 	}
-	void do_edit_date_entry()
+	void do_edit_date_entry()// change the date of a pending assignment
 	{}
-	void do_edit_desc()
+	void do_edit_desc()// edit the description of an assignment
 	{}
-	void do_count_late()
+	void do_count_late()// count the number of late items
 	{
 		list<assignments>::iterator lateiter;
 		assignments late;
@@ -138,28 +139,30 @@ public:
 		cin.get();
 	}
 
-	void do_sort()
+	void do_sort()// sort both lists by the due date
 	{
 		sort();
 	}
-	void do_undo()
+	void do_undo() // undo last action
 	{}
-	void do_redo()
+	void do_redo() // redo last undone action
 	{}
-	void do_save()
+	void do_save() // save all entries
 	{}
-	void do_exit()
+	void do_load() // load database and overwrite all items
+	{}
+	void do_exit() // exit program
 	{
 		exit(0);
 	}
 
 
 
-	bool compare(assignments& left, assignments& right)
+	bool compare(assignments& left, assignments& right) // compares two dates, used by the sort function
 	{
 		return left.getDate < right.getDate();
 	}
-	void sort()
+	void sort()// sort both due and completed lists by the due date
 
 	{
 		due.sort(compare);
