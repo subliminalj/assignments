@@ -27,6 +27,7 @@ public:
 			"Undo",
 			"Redo",
 			"Save",
+			"Load",
 			"Exit"
 		};
 		const size_t NUM_COMMANDS = 13;
@@ -45,14 +46,14 @@ public:
 			case 4: do_edit_date_entry(); break;
 			case 5: do_edit_desc(); break;
 			case 6: do_count_late(); break;
-			case 7: do_sort(); break;
+//			case 7: do_sort(); break;
 			case 8: do_undo(); break;
 			case 9: do_redo(); break;
 			case 10: do_save(); break;
 			case 11: do_load(); break;
 			case 12: do_exit(); break;
 			}
-			system("CLS");
+			//system("CLS");
 		} while (choice < NUM_COMMANDS - 1);
 	}
 
@@ -109,7 +110,7 @@ public:
 		list<assignments>::iterator deliter;
 		for (deliter = due.begin(); deliter != due.end(); deliter++)
 		{
-			if (deliter->getDesc == displaydel)
+			if (deliter->getDesc() == displaydel)
 			{
 				deliter = due.erase(deliter);
 				continue;
@@ -139,10 +140,10 @@ public:
 		cin.get();
 	}
 
-	void do_sort()// sort both lists by the due date
-	{
-		sort();
-	}
+	//void do_sort()// sort both lists by the due date
+	//{
+	//	sort();
+	//}
 	void do_undo() // undo last action
 	{}
 	void do_redo() // redo last undone action
@@ -154,7 +155,7 @@ public:
 	}
 	void do_load() // load database and overwrite all items
 	{
-		infile();
+		infile(due, completed);
 	}
 	void do_exit() // exit program
 	{
@@ -163,17 +164,16 @@ public:
 
 
 
-	bool compare(assignments& left, assignments& right) // compares two dates, used by the sort function
-	{
-		return left.getDate < right.getDate();
-	}
-	void sort()// sort both due and completed lists by the due date
+	//bool compare(assignments& left, assignments& right) // compares two dates, used by the sort function
+	//{
+	//	return left.getDate < right.getDate();
+	//}
+	//void sort()// sort both due and completed lists by the due date
 
-	{
-		due.sort(compare);
-		completed.sort(compare);
-
-	}
+	//{
+	//	due.sort(compare);
+	//	completed.sort(compare);
+	//}
 
 
 

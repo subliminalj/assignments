@@ -18,7 +18,7 @@ void outfile(list<assignments> due, list<assignments> completed)
 	
 	for (dueit = due.begin(); dueit != due.end(); dueit++)
 	{
-		fileout << dueit->getDate << "," << dueit->getDesc << "," << dueit->getAssDate << "," << dueit->statusAsString << endl;
+		fileout << dueit->getDate().toString() << "," << dueit->getDesc() << "," << dueit->getAssDate().toString() << "," << dueit->statusAsString() << endl;
 	}
 
 
@@ -58,7 +58,7 @@ void infile(list<assignments> due, list<assignments> completed)
 			temp.setAssDate(assigned);
 			char statchar = status[0];
 			temp.setStatus(statchar);
-			if (temp.getStatus == 'a' || temp.getStatus == 'A')//if the status is assigned push on the due list
+			if (temp.getStatus() == 0)//if the status is assigned push on the due list
 				due.push_back(temp);
 			else
 				completed.push_back(temp);// otherwise push on the completed list
