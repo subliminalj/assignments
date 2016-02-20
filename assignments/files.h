@@ -1,7 +1,9 @@
 #include "assignments.h"
 
-void outfile()
+void outfile(list<assignments> due, list<assignments> completed)
 {
+	list<assignments>::iterator dueit;
+	list<assignments>::iterator compit;
 
 	ofstream fileout;
 	fileout.open("assignments.dat", ios::out);
@@ -13,7 +15,12 @@ void outfile()
 	}
 
 	cout << "Writing to file..." << endl;
-	// output here
+	
+	for (dueit = due.begin(); dueit != due.end(); dueit++)
+	{
+		fileout << dueit->getDate << "," << dueit->getDesc << "," << dueit->getAssDate << "," << dueit->getStatus << endl;
+	}
+
 
 
 
