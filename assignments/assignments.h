@@ -54,7 +54,6 @@ public:
 			assStatus = late;
 		else
 			throw std::exception("Incorrect entry!");
-		cout << assStatus;
 	}
 
 	string statusAsString()
@@ -80,6 +79,27 @@ public:
 		return os;
 	}
 
+	bool findAss(list<assignments> fAss)
+	{
+		bool reenter = 0;
+		list<assignments>::iterator additer;
+
+		for (additer = fAss.begin(); additer != fAss.end(); additer++)
+		{
+			if (additer->getDate() == dueDate &&
+				additer->getDesc() == description &&
+				additer->getAssDate() == assignedDate &&
+				additer->getStatus() == assStatus)
+			{
+				cout << "This entry already exists!" << endl;
+				reenter = 1;
+				system("PAUSE");
+				return 1;
+			}
+		}
+		if (reenter == 0)
+			return 0;
+	}
 };
 
 

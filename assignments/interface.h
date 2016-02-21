@@ -51,6 +51,7 @@ public:
 			case 10: do_save(); break;
 			case 11: do_load(); break;
 			case 12: do_exit(); break;
+			default: cout << "Incorrect selection! Please enter a number between 0 - 12." << endl; break;
 			}
 			system("CLS");
 		} while (choice < NUM_COMMANDS - 1);
@@ -77,7 +78,8 @@ public:
 		Date duedate, assigned;
 		string desc;
 		char status;
-		assignments temp;
+		assignments addAss;
+		list<assignments>::iterator additer;
 		bool reenter = 0;
 
 		do 
@@ -88,7 +90,7 @@ public:
 			cout << "Input date assigned: " << endl;
 			cin >> assigned;
 
-			if (duedate < assigned)
+			if (duedate <= assigned)
 			{
 				cout << "The assignment cannot be due before it was assigned!" << endl
 					<< "Please reenter both dates." << endl;
@@ -118,15 +120,26 @@ public:
 				reenter = 0;
 		} while (reenter == 1);
 
-		temp.setDate(duedate);
-		temp.setDesc(desc);
-		temp.setAssDate(assigned);
-		temp.setStatus(status);
+		addAss.setDate(duedate);
+		addAss.setDesc(desc);
+		addAss.setAssDate(assigned);
+		addAss.setStatus(status);
 
-		if (temp.getStatus() == 0)
-			due.push_front(temp);
-		if (temp.getStatus() == 1 || temp.getStatus() == 2)
-			completed.push_front(temp);
+		if (addAss.getStatus() == 0)
+		{
+			if (addAss.findAss(due))
+				cout << "This entry already exists!" << endl;
+			else
+				due.push_front(addAss);
+		}
+
+		if (addAss.getStatus() == 1 || addAss.getStatus() == 2)
+		{
+			if (addAss.findAss(completed))
+				cout << "This entry already exists!" << endl;
+			else
+				completed.push_front(addAss);
+		}
 	}
 
 	void do_complete_entry() // mark an entry as completed
@@ -270,9 +283,7 @@ public:
 	{
 		exit(0);
 	}
-
-
-
+	
 	//bool compare(assignments& left, assignments& right) // compares two dates, used by the sort function
 	//{
 	//	return left.getDate < right.getDate();
