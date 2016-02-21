@@ -43,8 +43,8 @@ public:
 			case 1: do_add_entry(); break;
 			case 2: do_complete_entry(); break;
 			case 3: do_delete(); break;
-			case 4: do_edit_date_entry(); break;
-			case 5: do_edit_desc(); break;
+			case 4:
+			case 5: do_edit(choice); break;
 			case 6: do_count_late(); break;
 //			case 7: do_sort(); break;
 			case 8: do_undo(); break;
@@ -53,7 +53,7 @@ public:
 			case 11: do_load(); break;
 			case 12: do_exit(); break;
 			}
-			//system("CLS");
+			system("CLS");
 		} while (choice < NUM_COMMANDS - 1);
 	}
 
@@ -118,20 +118,69 @@ public:
 			}
 		}
 	}
-	void do_edit_date_entry()// change the date of a pending assignment
-	{}
-	void do_edit_desc()// edit the description of an assignment
-	{}
+	void do_edit( int toEdit )// change the date or description of a pending assignment
+	{
+		string editDesc, newDesc;
+		Date newDate;
+		list<assignments>::iterator edititer;
+		char searchAgain = 'Y';
+
+		cout << "Enter the name of the assignment to be updated: ";
+		cin >> editDesc;
+
+		for (edititer = due.begin(); edititer != due.end(); edititer++)
+		{
+			if (edititer->getDesc() == editDesc)
+			{
+				cout << "Below is the assignment to be edited." << endl
+					<< *edititer << endl;
+				if (toEdit == 4)
+				{
+					cout << "\nEnter the new due date: ";
+					cin >> newDate;
+					edititer->setDate(newDate);
+				}
+				else if (toEdit == 5)
+				{
+					cout << "\nEnter the new due description: ";
+					cin >> newDesc;
+					edititer->setDesc(newDesc);
+				}
+				cout << "Assignment updated." << endl;
+				searchAgain = 'N';
+			}
+		}
+		if (searchAgain != 'N')
+		{
+			cout << "\nAssignment not found! Do you want to search again (Y/N)? ";
+			cin >> searchAgain;
+
+			while (searchAgain != 'N' || searchAgain != 'n')
+			{
+				if (searchAgain == 'Y' || searchAgain == 'y')
+				{
+					do_edit(toEdit);
+					searchAgain = 'N';
+				}
+				else if (searchAgain != 'N' || searchAgain != 'n')
+				{
+					cout << "Incorrect entry! Please enter Y or N: ";
+					cin >> searchAgain;
+				}
+			}
+		}
+	}
+
 	void do_count_late()// count the number of late items
 	{
 		list<assignments>::iterator lateiter;
-		assignments late;
+		assignments lateAss;
 		int count_late = 0;
 
-		for (lateiter = completed.begin(); lateiter != completed.end(); lateiter++)
+		for (lateiter = due.begin(); lateiter != due.end(); lateiter++)
 		{
-			late = *lateiter;
-			if (late.getStatus() == 2)
+			lateAss = *lateiter;
+			if (lateAss.getStatus() == 2)
 				count_late++;
 		}
 
