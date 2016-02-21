@@ -8,7 +8,6 @@ class User_Interface{
 private:
 	list<assignments> due;
 	list<assignments> completed;
-
 	Date current_date;
 
 public:
@@ -79,27 +78,87 @@ public:
 		string desc;
 		char status;
 		assignments temp;
+		bool reenter = 0;
 
-		cout << "Input due date: " << endl;
-		cin >> duedate;
+		do 
+		{
+			cout << "Input due date: " << endl;
+			cin >> duedate;
+
+			cout << "Input date assigned: " << endl;
+			cin >> assigned;
+
+			if (duedate < assigned)
+			{
+				cout << "The assignment cannot be due before it was assigned!" << endl
+					<< "Please reenter both dates." << endl;
+				reenter = 1;
+			}
+			else
+			{
+				cout << "Input description: " << endl;
+				cin >> desc;
+				reenter = 0;
+			}
+		} while (reenter == 1);
+			
+		do
+		{
+			cout << "Input status (A = assigned, C = completed, & L = late): " << endl;
+			cin >> status;
+			if (status != 'A' && status != 'a' &&
+				status != 'C' && status != 'c' &&
+				status != 'L' && status != 'l')
+			{
+				cout << "The status can only be A, C, or L!" << endl
+					<< "Please reenter the assignment data." << endl;
+				reenter = 1;
+			}
+			else
+				reenter = 0;
+		} while (reenter == 1);
+
 		temp.setDate(duedate);
-
-		cout << "Input description: " << endl;
-		cin >> desc;
 		temp.setDesc(desc);
-		
-		cout << "Input date assigned: " << endl;
-		cin >> assigned;
 		temp.setAssDate(assigned);
-		
-		cout << "Input status (A = assigned, C = completed, & L = late): " << endl;
-		cin >> status;
 		temp.setStatus(status);
-		
-		due.push_front(temp);
+
+		if (temp.getStatus() == 0)
+			due.push_front(temp);
+		if (temp.getStatus() == 1 || temp.getStatus() == 2)
+			completed.push_front(temp);
 	}
+
 	void do_complete_entry() // mark an entry as completed
-	{}
+	{
+		string compAss;
+		char newStatus;
+		list<assignments>::iterator compiter;
+		assignments newComp;
+
+		cout << "Which assignment would you like to update as completed?" << endl;
+		cin >> compAss;
+
+		for (compiter = due.begin(); compiter != due.end(); compiter++)
+		{
+			if (compiter->getDesc() == compAss)
+			{
+				cout << "Assignment to be updated:\n"
+					<< *compiter << endl
+					<< "\nEnter the new status (C = complete & L = late): ";
+				cin >> newStatus;
+
+				compiter->setStatus(newStatus);
+				newComp = *compiter;
+				completed.push_front(newComp);
+
+				compiter = due.erase(compiter);
+				cout << "Status updated" << endl;
+				break;
+			}
+		}
+	}
+
 	void do_delete()// remove an entry from the due list
 	{
 		string displaydel;
@@ -118,6 +177,7 @@ public:
 			}
 		}
 	}
+
 	void do_edit( int toEdit )// change the date or description of a pending assignment
 	{
 		string editDesc, newDesc;
@@ -155,14 +215,14 @@ public:
 			cout << "\nAssignment not found! Do you want to search again (Y/N)? ";
 			cin >> searchAgain;
 
-			while (searchAgain != 'N' || searchAgain != 'n')
+			while (searchAgain != 'N' && searchAgain != 'n')
 			{
 				if (searchAgain == 'Y' || searchAgain == 'y')
 				{
 					do_edit(toEdit);
 					searchAgain = 'N';
 				}
-				else if (searchAgain != 'N' || searchAgain != 'n')
+				else if (searchAgain != 'N' && searchAgain != 'n')
 				{
 					cout << "Incorrect entry! Please enter Y or N: ";
 					cin >> searchAgain;
@@ -177,7 +237,7 @@ public:
 		assignments lateAss;
 		int count_late = 0;
 
-		for (lateiter = due.begin(); lateiter != due.end(); lateiter++)
+		for (lateiter = completed.begin(); lateiter != completed.end(); lateiter++)
 		{
 			lateAss = *lateiter;
 			if (lateAss.getStatus() == 2)
