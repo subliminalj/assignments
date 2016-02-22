@@ -45,7 +45,7 @@ public:
 			case 4:
 			case 5: do_edit(choice); break;
 			case 6: do_count_late(); break;
-//			case 7: do_sort(); break;
+				//			case 7: do_sort(); break;
 			case 8: do_undo(); break;
 			case 9: do_redo(); break;
 			case 10: do_save(); break;
@@ -82,49 +82,29 @@ public:
 		list<assignments>::iterator additer;
 		bool reenter = 0;
 
-		do 
+		cout << "Input description: ";
+		getline(cin, desc);
+
+		do
 		{
-			cout << "Input due date: " << endl;
-			cin >> duedate;
-			if (!duedate.check_valid) {
-				cout << "Invalid date format, use MM/DD/YY" << endl;
-				throw std::exception(" The date is not valid");
-			}
-				
-			cout << "Input date assigned: " << endl;
-			cin >> assigned;
-			if (!assigned.check_valid) {
-				cout << "Invalid date format, use MM/DD/YY" << endl;
-				throw std::exception(" The date is not valid");
-			}
+			cout << "Input due date: ";
+			duedate = addAss.inputDate();
+
+			cout << "Input date assigned: ";
+			assigned = addAss.inputDate();
+
 			if (duedate <= assigned)
 			{
-				cout << "The assignment cannot be due before it was assigned!" << endl
+				cout << "The assignment cannot be due before or on the day it was assigned!" << endl
 					<< "Please reenter both dates." << endl;
 				reenter = 1;
 			}
 			else
 			{
-				cout << "Input description: " << endl;
-				cin >> desc;
+				cout << "Input status (A = assigned, C = completed, & L = late): ";
+				status = addAss.inputStatus();
 				reenter = 0;
 			}
-		} while (reenter == 1);
-			
-		do
-		{
-			cout << "Input status (A = assigned, C = completed, & L = late): " << endl;
-			cin >> status;
-			if (status != 'A' && status != 'a' &&
-				status != 'C' && status != 'c' &&
-				status != 'L' && status != 'l')
-			{
-				cout << "The status can only be A, C, or L!" << endl
-					<< "Please reenter the assignment data." << endl;
-				reenter = 1;
-			}
-			else
-				reenter = 0;
 		} while (reenter == 1);
 
 		addAss.setDate(duedate);
@@ -205,15 +185,15 @@ public:
 		}
 	}
 
-	void do_edit( int toEdit )// change the date or description of a pending assignment
+	void do_edit(int toEdit)// change the date or description of a pending assignment
 	{
 		string editDesc, newDesc;
 		Date newDate;
 		list<assignments>::iterator edititer;
 		char searchAgain = 'Y';
-
+		do_display();
 		cout << "Enter the name of the assignment to be updated: ";
-		cin >> editDesc;
+		getline(cin, editDesc);
 
 		for (edititer = due.begin(); edititer != due.end(); edititer++)
 		{
@@ -287,7 +267,7 @@ public:
 	void do_save() // save all entries
 	{
 		outfile(due, completed);
-	
+
 	}
 	void do_load() // load database and overwrite all items
 	{
@@ -297,7 +277,7 @@ public:
 	{
 		exit(0);
 	}
-	
+
 	//bool compare(assignments& left, assignments& right) // compares two dates, used by the sort function
 	//{
 	//	return left.getDate < right.getDate();
