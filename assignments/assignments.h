@@ -7,9 +7,6 @@
 #include <iomanip>
 #include <list>
 #include <algorithm>
-#include <fstream>
-#include <istream>
-#include <ostream>
 #include <cstdlib>
 #include "Date.h"
 #include "String_Tokenizer.h"
@@ -74,9 +71,20 @@ public:
 		return statString;
 	}
 
-	friend ostream& operator<<(ostream& os, assignments& ass){
+	friend ostream& operator<<(ostream& os, assignments& ass)
+	{
 		os << ass.getDate().toString() << ", " << ass.getDesc() << ", " << ass.getAssDate().toString() << ", " << ass.statusAsString();
 		return os;
+	}
+
+	bool operator <(assignments& compareAss)  
+	{
+		if (dueDate != compareAss.getDate())
+			return dueDate < compareAss.getDate();
+		else if (description != compareAss.getDesc())
+			return description < compareAss.getDesc();
+		else
+			return assignedDate < compareAss.getAssDate();
 	}
 
 	bool findAss(list<assignments> fAss)
@@ -100,8 +108,16 @@ public:
 		if (reenter == 0)
 			return 0;
 	}
-};
 
+	/*void orderedInsert(list<assignments>& type, assignments insAss)
+	{
+		list<assignments>::iterator orderiter = type.begin();
+
+		while (orderiter != type.end() && *orderiter < insAss)
+			++orderiter;
+		type.insert(orderiter, insAss);
+	}*/
+};
 
 #endif
 
