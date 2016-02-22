@@ -41,16 +41,14 @@ public:
 	void setDate(Date due) { dueDate = due; }
 	void setDesc(string desc) { description = desc; }
 	void setAssDate(Date assigned){ assignedDate = assigned; }
-	void setStatus(char status) 
+	void setStatus(char status)
 	{
 		if (status == 'A' || status == 'a')
 			assStatus = assigned;
 		else if (status == 'C' || status == 'c')
 			assStatus = completed;
-		else if (status == 'L' || status == 'l')
-			assStatus = late;
 		else
-			throw std::exception("Incorrect entry!");
+			assStatus = late;
 	}
 
 	string statusAsString()
@@ -77,7 +75,7 @@ public:
 		return os;
 	}
 
-	bool operator <(assignments& compareAss)  
+	bool operator <(assignments& compareAss)
 	{
 		if (dueDate != compareAss.getDate())
 			return dueDate < compareAss.getDate();
@@ -109,13 +107,48 @@ public:
 			return 0;
 	}
 
+	Date inputDate()
+	{
+		Date iDate;
+		try
+		{
+			cin >> iDate;
+		}
+		catch (exception&)
+		{
+			cout << "Invalid date! Please reenter (year/mon/day or mon/day/year): ";
+			inputDate();
+		}
+		return iDate;
+	}
+
+	char inputStatus()
+	{
+		char iStatus;
+		try
+		{
+			cin >> iStatus;
+
+			if (iStatus != 'A' && iStatus != 'a' &&
+				iStatus != 'C' && iStatus != 'c' &&
+				iStatus != 'L' && iStatus != 'l')
+				throw std::exception("The status can only be A, C, or L!");
+		}
+		catch (exception&)
+		{
+			cout << "The status can only be A, C, or L!"
+				<< "\nPlease reenter status: ";
+			inputStatus();
+		}
+		return iStatus;
+	}
 	/*void orderedInsert(list<assignments>& type, assignments insAss)
 	{
-		list<assignments>::iterator orderiter = type.begin();
+	list<assignments>::iterator orderiter = type.begin();
 
-		while (orderiter != type.end() && *orderiter < insAss)
-			++orderiter;
-		type.insert(orderiter, insAss);
+	while (orderiter != type.end() && *orderiter < insAss)
+	++orderiter;
+	type.insert(orderiter, insAss);
 	}*/
 };
 
