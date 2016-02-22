@@ -86,10 +86,17 @@ public:
 		{
 			cout << "Input due date: " << endl;
 			cin >> duedate;
-
+			if (!duedate.check_valid) {
+				cout << "Invalid date format, use MM/DD/YY" << endl;
+				throw std::exception(" The date is not valid");
+			}
+				
 			cout << "Input date assigned: " << endl;
 			cin >> assigned;
-
+			if (!assigned.check_valid) {
+				cout << "Invalid date format, use MM/DD/YY" << endl;
+				throw std::exception(" The date is not valid");
+			}
 			if (duedate <= assigned)
 			{
 				cout << "The assignment cannot be due before it was assigned!" << endl
