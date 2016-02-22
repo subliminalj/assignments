@@ -130,7 +130,10 @@ public:
 			if (addAss.findAss(due))
 				cout << "This entry already exists!" << endl;
 			else
+			{
 				due.push_front(addAss);
+				due.sort();
+			}
 		}
 
 		if (addAss.getStatus() == 1 || addAss.getStatus() == 2)
@@ -138,7 +141,10 @@ public:
 			if (addAss.findAss(completed))
 				cout << "This entry already exists!" << endl;
 			else
+			{
 				completed.push_front(addAss);
+				completed.sort();
+			}
 		}
 	}
 
@@ -164,6 +170,7 @@ public:
 				compiter->setStatus(newStatus);
 				newComp = *compiter;
 				completed.push_front(newComp);
+				completed.sort();
 
 				compiter = due.erase(compiter);
 				cout << "Status updated" << endl;
