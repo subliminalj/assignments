@@ -40,6 +40,15 @@ void infile(list<assignments> due, list<assignments> completed)
 	}
 
 	cout << "Reading from file..." << endl;
+	while (due.empty() != true)
+	{
+		due.pop_front();
+	}
+
+	while (completed.empty() != true)
+	{
+		completed.pop_front();
+	}
 
 	while (!filein.eof())
 	{
