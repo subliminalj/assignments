@@ -41,14 +41,15 @@ public:
 	void setDate(Date due) { dueDate = due; }
 	void setDesc(string desc) { description = desc; }
 	void setAssDate(Date assigned){ assignedDate = assigned; }
-	void setStatus(char status)
+	void setStatus(Status status)
 	{
-		if (status == 'A' || status == 'a')
+		assStatus = status;
+	/*	if (status == 0)
 			assStatus = assigned;
 		else if (status == 'C' || status == 'c')
 			assStatus = completed;
 		else
-			assStatus = late;
+			assStatus = late;*/
 	}
 
 	string statusAsString()
@@ -78,11 +79,11 @@ public:
 	bool operator <(assignments& compareAss)
 	{
 		if (dueDate != compareAss.getDate())
-			return dueDate < compareAss.getDate();
+			return compareAss.getDate() < dueDate;
 		else if (description != compareAss.getDesc())
-			return description < compareAss.getDesc();
+			return compareAss.getDesc() < description;
 		else
-			return assignedDate < compareAss.getAssDate();
+			return compareAss.getAssDate() < assignedDate;
 	}
 
 	bool findAss(list<assignments> fAss)
@@ -94,8 +95,7 @@ public:
 		{
 			if (additer->getDate() == dueDate &&
 				additer->getDesc() == description &&
-				additer->getAssDate() == assignedDate &&
-				additer->getStatus() == assStatus)
+				additer->getAssDate() == assignedDate)
 			{
 				cout << "This entry already exists!" << endl;
 				reenter = 1;
@@ -129,18 +129,55 @@ public:
 		{
 			cin >> iStatus;
 
-			if (iStatus != 'A' && iStatus != 'a' &&
-				iStatus != 'C' && iStatus != 'c' &&
-				iStatus != 'L' && iStatus != 'l')
-				throw std::exception("The status can only be A, C, or L!");
+			if (iStatus != 'N' && iStatus != 'n' &&
+				iStatus != 'Y' && iStatus != 'y')
+				throw std::exception("Invalid entry!");
 		}
 		catch (exception&)
 		{
-			cout << "The status can only be A, C, or L!"
-				<< "\nPlease reenter status: ";
+			cout << "Please indicate whether or not the assignment is complete with Y or N!"
+				<< "\nHas this assignment been completed?  ";
 			inputStatus();
 		}
 		return iStatus;
+	}
+
+	Status evaluateStatus()
+	{
+		char compStatus;
+		cout << "Is this assignment complete (enter Y or N)? ";
+		compStatus = inputStatus();
+		if (compStatus == 'Y' || compStatus == 'y')
+			evaluateCompStatus(dueDate);
+		else
+			return assigned;
+	}
+
+	Status evaluateStatus(char stat)
+	{
+		if (stat == 'a')
+			return assigned;
+		else if (stat == 'c')
+			return completed;
+		else
+			return late;
+	}
+
+	Status evaluateCompStatus (Date cDueDate)
+	{
+		Date compDate;
+		cout << "Please enter the completion date: ";
+		compDate = inputDate();
+		if (compDate > cDueDate)
+		{
+			cout << "This assignment is late. Sorry :(";
+			return late;
+		}
+		else
+		{
+			cout << "This assignment was completed on time. Congrats!";
+			return completed;
+		}
 	}
 	/*void orderedInsert(list<assignments>& type, assignments insAss)
 	{

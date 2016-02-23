@@ -75,9 +75,10 @@ public:
 
 	void do_add_entry()// add a new entry to the due list
 	{
-		Date duedate, assigned;
+		Date duedate, assigned, completedate;
 		string desc;
-		char status;
+		int status;
+		char compStatus;
 		assignments addAss;
 		list<assignments>::iterator additer;
 		bool reenter = 0;
@@ -100,33 +101,23 @@ public:
 				reenter = 1;
 			}
 			else
-			{
-				cout << "Input status (A = assigned, C = completed, & L = late): ";
-				status = addAss.inputStatus();
 				reenter = 0;
-			}
 		} while (reenter == 1);
 
 		addAss.setDate(duedate);
 		addAss.setDesc(desc);
 		addAss.setAssDate(assigned);
-		addAss.setStatus(status);
 
-		if (addAss.getStatus() == 0)
+		if (addAss.findAss(due) || addAss.findAss(completed))
+			cout << "This entry already exists!" << endl;
+		else
 		{
-			if (addAss.findAss(due))
-				cout << "This entry already exists!" << endl;
-			else
+			addAss.setStatus(addAss.evaluateStatus());
+			if (addAss.getStatus() == 0)
 			{
 				due.push_front(addAss);
 				due.sort();
 			}
-		}
-
-		if (addAss.getStatus() == 1 || addAss.getStatus() == 2)
-		{
-			if (addAss.findAss(completed))
-				cout << "This entry already exists!" << endl;
 			else
 			{
 				completed.push_front(addAss);
@@ -150,11 +141,9 @@ public:
 			if (compiter->getDesc() == compAss)
 			{
 				cout << "Assignment to be updated:\n"
-					<< *compiter << endl
-					<< "\nEnter the new status (C = complete & L = late): ";
-				cin >> newStatus;
+					<< *compiter << endl;
+				compiter->setStatus(newComp.evaluateCompStatus(compiter->getDate()));
 
-				compiter->setStatus(newStatus);
 				newComp = *compiter;
 				completed.push_front(newComp);
 				completed.sort();
@@ -188,10 +177,10 @@ public:
 	void do_edit(int toEdit)// change the date or description of a pending assignment
 	{
 		string editDesc, newDesc;
-		Date newDate;
+		assignments editAss;
 		list<assignments>::iterator edititer;
 		char searchAgain = 'Y';
-		do_display();
+		
 		cout << "Enter the name of the assignment to be updated: ";
 		getline(cin, editDesc);
 
@@ -204,8 +193,7 @@ public:
 				if (toEdit == 4)
 				{
 					cout << "\nEnter the new due date: ";
-					cin >> newDate;
-					edititer->setDate(newDate);
+					edititer->setDate(editAss.inputDate());
 				}
 				else if (toEdit == 5)
 				{

@@ -66,7 +66,7 @@ void infile(list<assignments> due, list<assignments> completed)
 			temp.setDesc(desc);
 			temp.setAssDate(assigned);
 			char statchar = status[0];
-			temp.setStatus(statchar);
+			temp.setStatus(temp.evaluateStatus(statchar));
 			if (temp.getStatus() == 0)//if the status is assigned push on the due list
 				due.push_back(temp);
 			else
