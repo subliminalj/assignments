@@ -28,7 +28,7 @@ void outfile(list<assignments> due, list<assignments> completed)
 
 }
 
-void infile(list<assignments> due, list<assignments> completed)
+void infile(list<assignments>& due, list<assignments>& completed)
 {
 
 	ifstream filein;
