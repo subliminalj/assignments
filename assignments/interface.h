@@ -198,7 +198,7 @@ public:
 				else if (toEdit == 5)
 				{
 					cout << "\nEnter the new due description: ";
-					cin >> newDesc;
+					getline(cin, newDesc);
 					edititer->setDesc(newDesc);
 				}
 				cout << "Assignment updated." << endl;
@@ -268,7 +268,7 @@ public:
 
 	//bool compare(assignments& left, assignments& right) // compares two dates, used by the sort function
 	//{
-	//	return left.getDate < right.getDate();
+	//	return left.getDate() < right.getDate();
 	//}
 	//void sort()// sort both due and completed lists by the due date
 
