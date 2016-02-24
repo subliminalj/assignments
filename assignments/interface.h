@@ -23,13 +23,11 @@ public:
 			"Edit Description",
 			"Count Late Assignments",
 			"Sort pending assignments by due date",
-			"Undo",
-			"Redo",
 			"Save",
 			"Load",
 			"Exit"
 		};
-		const size_t NUM_COMMANDS = 13;
+		const size_t NUM_COMMANDS = 11;
 		size_t choice = NUM_COMMANDS - 1;
 		do {
 			for (size_t i = 0; i < NUM_COMMANDS; i++) {
@@ -45,12 +43,10 @@ public:
 			case 4:
 			case 5: do_edit(choice); break;
 			case 6: do_count_late(); break;
-				//			case 7: do_sort(); break;
-			case 8: do_undo(); break;
-			case 9: do_redo(); break;
-			case 10: do_save(); break;
-			case 11: do_load(); break;
-			case 12: do_exit(); break;
+			//case 7: do_sort(); break;
+			case 8: do_save(); break;
+			case 9: do_load(); break;
+			case 10: do_exit(); break;
 			default: cout << "Incorrect selection! Please enter a number between 0 - 12." << endl; break;
 			}
 			system("CLS");
@@ -246,12 +242,10 @@ public:
 
 	//void do_sort()// sort both lists by the due date
 	//{
-	//	sort();
+	//	due.sort(compare);
+	//	completed.sort(compare);
 	//}
-	void do_undo() // undo last action
-	{}
-	void do_redo() // redo last undone action
-	{}
+	
 	void do_save() // save all entries
 	{
 		outfile(due, completed);
@@ -266,17 +260,11 @@ public:
 		exit(0);
 	}
 
-	//bool compare(assignments& left, assignments& right) // compares two dates, used by the sort function
-	//{
-	//	return left.getDate() < right.getDate();
-	//}
-	//void sort()// sort both due and completed lists by the due date
-
-	//{
-	//	due.sort(compare);
-	//	completed.sort(compare);
-	//}
-
+	bool compare(assignments& left, assignments& right) // compares two dates, used by the sort function
+	{
+		return left.getDate() < right.getDate();
+	}
+	
 
 
 };
