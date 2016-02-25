@@ -68,9 +68,15 @@ void infile(list<assignments> due, list<assignments> completed)
 			char statchar = status[0];
 			temp.setStatus(temp.evaluateStatus(statchar));
 			if (temp.getStatus() == 0)//if the status is assigned push on the due list
+			{
 				due.push_back(temp);
+				due.sort();
+			}
 			else
+			{
 				completed.push_back(temp);// otherwise push on the completed list
+				completed.sort();
+			}
 		}
 	}
 	filein.close();

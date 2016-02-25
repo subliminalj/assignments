@@ -1,3 +1,4 @@
+//assignments.h sets up the assignments class, which stores and manages assignment data input from interface.h and files.h
 #ifndef _ASSIGNMENTS_H_
 #define _ASSIGNMENTS_H_
 
@@ -15,8 +16,8 @@ using namespace std;
 
 class assignments
 {
-	enum Status { assigned, completed, late };
 private:
+	enum Status { assigned, completed, late };
 	Date dueDate;
 	string description;
 	Date assignedDate;
@@ -40,18 +41,9 @@ public:
 
 	void setDate(Date due) { dueDate = due; }
 	void setDesc(string desc) { description = desc; }
-	void setAssDate(Date assigned){ assignedDate = assigned; }
-	void setStatus(Status status)
-	{
-		assStatus = status;
-	/*	if (status == 0)
-			assStatus = assigned;
-		else if (status == 'C' || status == 'c')
-			assStatus = completed;
-		else
-			assStatus = late;*/
-	}
-
+	void setAssDate(Date assigned) { assignedDate = assigned; }
+	void setStatus(Status status) { assStatus = status;	}
+	//connects the enum values of each status to a string value for output
 	string statusAsString()
 	{
 		switch (assStatus)
@@ -69,13 +61,14 @@ public:
 
 		return statString;
 	}
-
+	//allows assignment objects to use the << operator in the ostream
 	friend ostream& operator<<(ostream& os, assignments& ass)
 	{
 		os << ass.getDate().toString() << ", " << ass.getDesc() << ", " << ass.getAssDate().toString() << ", " << ass.statusAsString();
 		return os;
 	}
-
+	//allows assignment objects to use the < operator for comparisons by comparing values currently assigned to 
+	//assignment class variables to other entries in the list
 	bool operator <(assignments& compareAss)
 	{
 		if (dueDate != compareAss.getDate())
@@ -85,7 +78,7 @@ public:
 		else
 			return compareAss.getAssDate() < assignedDate;
 	}
-
+	//iterates through the due or completed lists to confirm if an attempted entry already exists
 	bool findAss(list<assignments> fAss)
 	{
 		bool reenter = 0;
@@ -106,7 +99,7 @@ public:
 		if (reenter == 0)
 			return 0;
 	}
-
+	//catches exceptions if a date is entered incorrectly and allows user to reenter the date until the format is correct
 	Date inputDate()
 	{
 		Date iDate;
@@ -121,7 +114,8 @@ public:
 		}
 		return iDate;
 	}
-
+	//throws an exeption if the user doesn't input y or n as a status. If not, the user is prompted to reenter the status
+	//until it is a y or n value.
 	char inputStatus()
 	{
 		char iStatus;
@@ -141,18 +135,20 @@ public:
 		}
 		return iStatus;
 	}
-
+	//prompts user to state whether or not the assignment is complete. If it is, evaluateCompStatus is run based on
+	//the current dueDate value. If it isn't, the assigned value is returned.
 	Status evaluateStatus()
 	{
 		char compStatus;
 		cout << "Is this assignment complete (enter Y or N)? ";
-		compStatus = inputStatus();
+		compStatus = inputStatus();	//confirms the status is appropritaely entered
 		if (compStatus == 'Y' || compStatus == 'y')
 			evaluateCompStatus(dueDate);
 		else
 			return assigned;
 	}
-
+	//This evaluateStatus is used for reading files, taking the first letter of the file's status string, 
+	//which will be 'a', 'c', or 'l'
 	Status evaluateStatus(char stat)
 	{
 		if (stat == 'a')
@@ -162,7 +158,8 @@ public:
 		else
 			return late;
 	}
-
+	//prompts user to input the completion date. If it was completed after the due date, returns the late value. 
+	//Otherwise, completed is returned
 	Status evaluateCompStatus (Date cDueDate)
 	{
 		Date compDate;
@@ -179,14 +176,6 @@ public:
 			return completed;
 		}
 	}
-	/*void orderedInsert(list<assignments>& type, assignments insAss)
-	{
-	list<assignments>::iterator orderiter = type.begin();
-
-	while (orderiter != type.end() && *orderiter < insAss)
-	++orderiter;
-	type.insert(orderiter, insAss);
-	}*/
 };
 
 #endif
