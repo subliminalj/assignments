@@ -18,7 +18,7 @@ void outfile(list<assignments> due, list<assignments> completed)
 	
 	for (dueit = due.begin(); dueit != due.end(); dueit++)
 	{
-		fileout << dueit->getDate().toString() << "," << dueit->getDesc() << "," << dueit->getAssDate().toString() << "," << dueit->statusAsString() << endl;
+		fileout << dueit->getDate().toString() << "," << dueit->getDesc() << "," << dueit->getAssDate().toString() << "," << dueit->statusAsString() << endl; // save fields as csv
 	}
 
 
@@ -40,12 +40,12 @@ void infile(list<assignments>& due, list<assignments>& completed)
 	}
 
 	cout << "Reading from file..." << endl;
-	while (due.empty() != true)
+	while (due.empty() != true) // clear due list
 	{
 		due.pop_front();
 	}
 
-	while (completed.empty() != true)
+	while (completed.empty() != true) // clear completed list
 	{
 		completed.pop_front();
 	}
