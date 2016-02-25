@@ -154,7 +154,6 @@ public:
 	{
 		string displaydel;
 		cout << "Type the description of the pending assignment to delete" << endl;
-		//do_display();************************************************************************************************** 
 		cout << "description: ";
 		getline(cin, displaydel);
 		list<assignments>::iterator deliter;
